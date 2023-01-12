@@ -1,0 +1,82 @@
+body{
+    font-family: Tahoma;
+    box-sizing: border-box;
+    font-size: 12 px;
+}
+
+.shop-menu {
+    list-style-type: none;
+    width: 40%;
+    margin: 0px;
+}
+
+.bi-bag {
+    font-size: 20px;
+}
+
+.shop-banner {
+    height: 400px;
+    position: relative;
+    background: url("photos/banner-photo.jpg") no-repeat center center/cover;
+}
+
+.shop-banner p:first-child{
+    color: #fff;
+    position: absolute;
+    top: 40%;
+    left: 48%;
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.shop-banner p:nth-child(2){
+    color: #fff;
+    position: absolute;
+    top: 50%;
+    left: 40%;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.categories{
+    list-style-type: none;
+    
+}
+
+.categories li{
+    color: #848282;
+}
+
+.clothes-options {
+    height: 400px;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.add-cart{
+    float: right;
+}
+
+.product-image {
+    height: 110px;
+    width: 37%;
+}
+
+.dropdown-menu {
+    width: 330px;
+}
+
+.viewcart, .checkout {
+    background-color: #000;
+    color: #fff;
+    border-radius: 20px;
+    width: 33%;
+    height: 40px;
+}
+
+.remove-product{
+    display: block;
+    border: 10px;
+    margin-top: 20px;
+}
+
