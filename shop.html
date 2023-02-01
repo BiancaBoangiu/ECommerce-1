@@ -25,18 +25,15 @@
             <div class="dropstart">
                 <button class="btn bi bi-bag" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                 </button>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton1" onclick="event.stopPropagation()">
                   <ul style="list-style-type: none;">
                     <li class="d-flex">
-                        <img src="photos/clothes-option-1.jpg" class="product-image m-2">
-                        <div class="m-2 product-details">
-                            <p class="product-name">Wool Coat</p>
-                            <span class="product-price">$70.00</span>
-                            <button class="remove-product">Remove</button>
-                        </div>
+                        <p class="m-3 empty-cart">Empty shopping cart</p>
                     </li>
 
                   </ul>
+                  <p class="ms-5 total-products"></p>
+                  <p class="ms-5 fw-bold total-price">Total $0</p>
                   <div class="d-flex justify-content-around">
                     <button class="viewcart">VIEW CART</>
                      <button class="checkout">CHECK OUT</>
@@ -68,84 +65,84 @@
                 <div class="row mb-4">
                     <div class="col-4">
                         <img src="photos/clothes-option-1.jpg" class="clothes-options">
-                        <i class="bi bi-bag add-cart"></i>
+                        <i class="bi bi-bag add-cart" onclick="addToCart(event)"></i>
                         <div>Wool Coat</div>
-                        <span>$70.00</span>
+                        <span>$</span><span class="product-price">70.00</span>
                     </div>
                     <div class="col-4 clothes-item">
                         <img src="photos/clothes-option-2.jpg" class="clothes-options">
-                        <i class="bi bi-bag add-cart"></i>
+                        <i class="bi bi-bag add-cart"  onclick="addToCart(event)"></i>
                         <div>Checkered Dress</div>
-                        <span>$30.00</span>
+                        <span>$</span><span class="product-price">30.00</span>
                     </div>
                     <div class="col-4">
                         <img src="photos/clothes-option-3.jpg" class="clothes-options">
-                        <i class="bi bi-bag add-cart"></i>
+                        <i class="bi bi-bag add-cart"  onclick="addToCart(event)"></i>
                         <div>Black Dress</div>
-                        <span>$40.00</span>
+                        <span>$</span><span class="product-price">40.00</span>
                     </div>
                 </div>
                 <div class="row mb-4">
                     <div class="col-4">
                         <img src="photos/clothes-option-4.jpg" class="clothes-options">
-                        <i class="bi bi-bag add-cart"></i>
+                        <i class="bi bi-bag add-cart"  onclick="addToCart(event)"></i>
                         <div>Blue Silk Shirt</div>
-                        <span>$35.00</span>
+                        <span>$</span><span class="product-price">35.00</span>
                     </div>
                     <div class="col-4">
                         <img src="photos/clothes-option-5.jpg" class="clothes-options">
-                        <i class="bi bi-bag add-cart"></i>
+                        <i class="bi bi-bag add-cart"  onclick="addToCart(event)"></i>
                         <div>Gray Cotton Pants</div>
-                        <span>$34.00</span>
+                        <span>$</span><span class="product-price">34.00</span>
                     </div>
                     <div class="col-4">
                         <img src="photos/clothes-option-6.jpg" class="clothes-options">
-                        <i class="bi bi-bag add-cart"></i>
+                        <i class="bi bi-bag add-cart"  onclick="addToCart(event)"></i>
                         <div>Black Boots</div>
-                        <span>$45.00</span>
+                        <span>$</span><span class="product-price">45.00</span>
                         
                     </div>
                 </div>
                 <div class="row mb-4">
                     <div class="col-4">
                         <img src="photos/clothes-option-1.jpg" class="clothes-options">
-                        <i class="bi bi-bag add-cart"></i>
+                        <i class="bi bi-bag add-cart"  onclick="addToCart(event)"></i>
                         <div>Wool Coat</div>
-                        <span>$70.00</span>
+                        <span>$</span><span class="product-price">70.00</span>
                     </div>
                     <div class="col-4">
                         <img src="photos/clothes-option-2.jpg" class="clothes-options">
-                        <i class="bi bi-bag add-cart"></i>
+                        <i class="bi bi-bag add-cart" onclick="addToCart(event)"></i>
                         <div>Checkered Dress</div>
-                        <span>$30.00</span>
+                        <span>$</span><span class="product-price">30.00</span>
                     </div>
                     <div class="col-4">
                         <img src="photos/clothes-option-3.jpg" class="clothes-options">
-                        <i class="bi bi-bag add-cart"></i>
+                        <i class="bi bi-bag add-cart" onclick="addToCart(event)"></i>
                         <div>Black Dress</div>
-                        <span>$40.00</span>
+                        <span>$</span><span class="product-price">40.00</span>
                     </div>
                 </div>
                 <div class="row mb-4">
                     <div class="col-4">
                         <img src="photos/clothes-option-4.jpg" class="clothes-options">
-                        <i class="bi bi-bag add-cart"></i>
+                        <i class="bi bi-bag add-cart" onclick="addToCart(event)"></i>
                         <div>Blue Silk Shirt</div>
-                        <span>$35.00</span>
+                        <span>$</span><span class="product-price">35.00</span>
                         
                     </div>
                     <div class="col-4">
                         <img src="photos/clothes-option-5.jpg" class="clothes-options">
-                        <i class="bi bi-bag add-cart"></i>
+                        <i class="bi bi-bag add-cart" onclick="addToCart(event)"></i>
                         <div>Gray Cotton Pants</div>
-                        <span>$34.00</span>
+                        <span>$</span><span class="product-price">34.00</span>
                         
                     </div>
                     <div class="col-4">
                         <img src="photos/clothes-option-6.jpg" class="clothes-options">
-                        <i class="bi bi-bag add-cart"></i>
+                        <i class="bi bi-bag add-cart" onclick="addToCart(event)"></i>
                         <div>Black Boots</div>
-                        <span>$45.00</span>
+                        <span>$</span><span class="product-price">45.00</span>
                         
                     </div>
                 </div>

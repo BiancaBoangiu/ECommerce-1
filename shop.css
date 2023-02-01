@@ -80,3 +80,28 @@ body{
     margin-top: 20px;
 }
 
+.empty-cart{
+    color: rgb(243, 63, 63);
+}
+
+.cart-clothes-options{
+    height: 120px;
+    width: 140px;
+    margin: 20px;
+}
+
+.coupon-code{
+    border-radius: 10px;
+}
+
+.cart-product-details{
+    border: 1px #b3b0b0 solid ;
+    border-bottom: 0px;
+}
+
+.bottom-border{
+    border-bottom: 1px #b3b0b0 solid;
+}
+
+
+
