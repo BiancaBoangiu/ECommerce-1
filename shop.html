@@ -6,13 +6,15 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" ></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js" integrity="sha384-Atwg2Pkwv9vp0ygtn1JAojH0nYbwNJLPhwyoVbhoPwBhjQPR5VtM2+xf0Uwh9KtT" crossorigin="anonymous"></script>
     <link href="shop.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://unpkg.com/swiper@8/swiper-bundle.min.css"/>
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+    <script src="https://kit.fontawesome.com/3ccab63bad.js" crossorigin="anonymous"></script>
     <title>Online clothes shop</title>
   </head>
   <body>
     <div class="container-fluid">
         <nav class="navbar bg-light justify-content-between py-3">
-            <span class="navbar-brand" href="#">Online shop</span>
+            <span class="navbar-brand" href="#"></span>
             <ul class="shop-menu d-flex justify-content-between">
                 <li>Home</li>
                 <li>Shop </li>
@@ -61,95 +63,145 @@
                     </ul>
                 </div>
             </div>
-            <div class="col-9">
-                <div class="row mb-4">
-                    <div class="col-4">
+            <div class="col-9 info">
+                <div class="row mb-4 ">
+                    <div class="col-4 product-item"  data-id="0">
                         <img src="photos/clothes-option-1.jpg" class="clothes-options">
-                        <i class="bi bi-bag add-cart" onclick="addToCart(event)"></i>
-                        <div>Wool Coat</div>
+                        <div class="product-name-container">
+                            <div class="clothes-name">Wool Coat</div>
+                            <button class="bi bi-bag add-cart" onclick="addToCart(event)"></button>
+                        </div>
                         <span>$</span><span class="product-price">70.00</span>
                     </div>
-                    <div class="col-4 clothes-item">
+                    <div class="col-4 product-item" data-id="1">
                         <img src="photos/clothes-option-2.jpg" class="clothes-options">
-                        <i class="bi bi-bag add-cart"  onclick="addToCart(event)"></i>
-                        <div>Checkered Dress</div>
+                        <div class="product-name-container">
+                            <div class="clothes-name" >Checkered Dress</div>
+                            <button class="bi bi-bag add-cart"  onclick="addToCart(event)"></button>
+                        </div>
                         <span>$</span><span class="product-price">30.00</span>
                     </div>
-                    <div class="col-4">
+                    <div class="col-4 product-item" data-id="2">
                         <img src="photos/clothes-option-3.jpg" class="clothes-options">
-                        <i class="bi bi-bag add-cart"  onclick="addToCart(event)"></i>
-                        <div>Black Dress</div>
+                        <div class="product-name-container">
+                            <div class="clothes-name" >Black Dress</div>
+                            <button class="bi bi-bag add-cart"  onclick="addToCart(event)"></button>
+                        </div>
                         <span>$</span><span class="product-price">40.00</span>
                     </div>
                 </div>
                 <div class="row mb-4">
-                    <div class="col-4">
+                    <div class="col-4 product-item" data-id="3">
                         <img src="photos/clothes-option-4.jpg" class="clothes-options">
-                        <i class="bi bi-bag add-cart"  onclick="addToCart(event)"></i>
-                        <div>Blue Silk Shirt</div>
+                        <div class="product-name-container">
+                            <div class="clothes-name" >Blue Silk Shirt</div>
+                            <button class="bi bi-bag add-cart"  onclick="addToCart(event)"></button>
+                        </div>
                         <span>$</span><span class="product-price">35.00</span>
                     </div>
-                    <div class="col-4">
+                    <div class="col-4 product-item" data-id="4">
                         <img src="photos/clothes-option-5.jpg" class="clothes-options">
-                        <i class="bi bi-bag add-cart"  onclick="addToCart(event)"></i>
-                        <div>Gray Cotton Pants</div>
+                        <div class="product-name-container">
+                            <div class="clothes-name" >Gray Cotton Pants</div>
+                            <button class="bi bi-bag add-cart"  onclick="addToCart(event)"></button>
+                        </div>
                         <span>$</span><span class="product-price">34.00</span>
                     </div>
-                    <div class="col-4">
+                    <div class="col-4 product-item" data-id="5">
                         <img src="photos/clothes-option-6.jpg" class="clothes-options">
-                        <i class="bi bi-bag add-cart"  onclick="addToCart(event)"></i>
-                        <div>Black Boots</div>
+                        <div class="product-name-container">
+                            <div class="clothes-name" >Black Boots</div>
+                            <button class="bi bi-bag add-cart"  onclick="addToCart(event)"></button>
+                        </div>
                         <span>$</span><span class="product-price">45.00</span>
                         
                     </div>
                 </div>
                 <div class="row mb-4">
-                    <div class="col-4">
+                    <div class="col-4 product-item" data-id="6">
                         <img src="photos/clothes-option-1.jpg" class="clothes-options">
-                        <i class="bi bi-bag add-cart"  onclick="addToCart(event)"></i>
-                        <div>Wool Coat</div>
+                        <div class="product-name-container">
+                            <div class="clothes-name" >Wool Coat</div>
+                            <button class="bi bi-bag add-cart"  onclick="addToCart(event)"></button>
+                        </div>
                         <span>$</span><span class="product-price">70.00</span>
                     </div>
-                    <div class="col-4">
+                    <div class="col-4 product-item" data-id="7">
                         <img src="photos/clothes-option-2.jpg" class="clothes-options">
-                        <i class="bi bi-bag add-cart" onclick="addToCart(event)"></i>
-                        <div>Checkered Dress</div>
+                        <div class="product-name-container">
+                            <div class="clothes-name" >Checkered Dress</div>
+                            <button class="bi bi-bag add-cart"  onclick="addToCart(event)"></button>
+                        </div>
                         <span>$</span><span class="product-price">30.00</span>
                     </div>
-                    <div class="col-4">
+                    <div class="col-4 product-item" data-id="8">
                         <img src="photos/clothes-option-3.jpg" class="clothes-options">
-                        <i class="bi bi-bag add-cart" onclick="addToCart(event)"></i>
-                        <div>Black Dress</div>
+                        <div class="product-name-container">
+                            <div class="clothes-name" >Black Dress</div>
+                            <button class="bi bi-bag add-cart"  onclick="addToCart(event)"></button>
+                        </div>
                         <span>$</span><span class="product-price">40.00</span>
                     </div>
                 </div>
                 <div class="row mb-4">
-                    <div class="col-4">
+                    <div class="col-4 product-item" data-id="9">
                         <img src="photos/clothes-option-4.jpg" class="clothes-options">
-                        <i class="bi bi-bag add-cart" onclick="addToCart(event)"></i>
-                        <div>Blue Silk Shirt</div>
+                        <div class="product-name-container">
+                            <div class="clothes-name" >Blue Silk Shirt</div>
+                            <button class="bi bi-bag add-cart"  onclick="addToCart(event)"></button>
+                        </div>
                         <span>$</span><span class="product-price">35.00</span>
                         
                     </div>
-                    <div class="col-4">
+                    <div class="col-4 product-item" data-id="10">
                         <img src="photos/clothes-option-5.jpg" class="clothes-options">
-                        <i class="bi bi-bag add-cart" onclick="addToCart(event)"></i>
-                        <div>Gray Cotton Pants</div>
+                        <div class="product-name-container">
+                            <div class="clothes-name" >Gray Cotton Pants</div>
+                            <button class="bi bi-bag add-cart"  onclick="addToCart(event)"></button>
+                        </div>
                         <span>$</span><span class="product-price">34.00</span>
                         
                     </div>
-                    <div class="col-4">
+                    <div class="col-4 product-item" data-id="11">
                         <img src="photos/clothes-option-6.jpg" class="clothes-options">
-                        <i class="bi bi-bag add-cart" onclick="addToCart(event)"></i>
-                        <div>Black Boots</div>
+                        <div class="product-name-container">
+                            <div class="clothes-name" >Black Boots</div>
+                            <button class="bi bi-bag add-cart"  onclick="addToCart(event)"></button>
+                        </div>
                         <span>$</span><span class="product-price">45.00</span>
                         
                     </div>
                 </div>
             </div>
         </div>
+        <div class="row">
+            <div class="col-6 message">
+
+            </div>
+            <div class="col-6 contact">
+                <h3 class="mb-4">Send us a message</h3>
+                <div class="d-flex justify-content-between mb-3">
+                    <label for="name">Name</label>
+                    <input type="text" class="form-control contact-name">
+                    <label for="email" class="mb-2">Email adress</label>
+                    <input type="text" class="form-control contact-email">
+                </div>
+                <label for="phone-number" class="mb-2">Mobile number</label>
+                <input type="tel" class="form-control contact-phone-number mb-3">
+                <label for="message" class="mb-2">Message</label>
+                <input type="text" class="form-control contact-message mb-3">
+                <button class="send-message">Send message</button>
+            </div>
+        </div>
+        <div class="swiper mySwiper my-4">
+            <div class="swiper-wrapper">
+              
+            </div>
+            <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev"></div>
+        </div>
     </div>   
-  	
+  <script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>	
   <script src="shop.js"></script>
   </body>
 </html>

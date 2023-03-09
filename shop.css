@@ -12,6 +12,8 @@ body{
 
 .bi-bag {
     font-size: 20px;
+    border: none;
+    background-color: rgb(255, 255, 255, 50);
 }
 
 .shop-banner {
@@ -53,10 +55,6 @@ body{
     margin-bottom: 10px;
 }
 
-.add-cart{
-    float: right;
-}
-
 .product-image {
     height: 110px;
     width: 37%;
@@ -86,7 +84,7 @@ body{
 
 .cart-clothes-options{
     height: 120px;
-    width: 140px;
+    width: 138px;
     margin: 20px;
 }
 
@@ -103,5 +101,42 @@ body{
     border-bottom: 1px #b3b0b0 solid;
 }
 
+.product-name-container{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
 
+.contact{
+    background-color: #ede9e9;
+    padding: 18px;
+    border-radius: 3px;
+}
+
+.contact-name, .contact-email{
+    width: 35%;
+    height: 10%;
+}
+
+.send-message{
+    border-radius: 20px;
+    font-size: 17px;
+    color: #fff;
+    background-color: #000;
+}
+
+.swiper-button-next,
+.swiper-button-prev {
+   outline: none;
+}
+
+
+div.swiper-button-next, div.swiper-button-prev {
+  top: 70%
+}
+.post-image{
+    width: 30%;
+    height: 20%;
+    border-radius: 4px;
+}
 
