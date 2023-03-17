@@ -175,22 +175,34 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-6 message">
+            <div class="col-3 message">
 
             </div>
-            <div class="col-6 contact">
+            <div class="col-9 contact">
                 <h3 class="mb-4">Send us a message</h3>
-                <div class="d-flex justify-content-between mb-3">
-                    <label for="name">Name</label>
-                    <input type="text" class="form-control contact-name">
-                    <label for="email" class="mb-2">Email adress</label>
-                    <input type="text" class="form-control contact-email">
-                </div>
-                <label for="phone-number" class="mb-2">Mobile number</label>
-                <input type="tel" class="form-control contact-phone-number mb-3">
-                <label for="message" class="mb-2">Message</label>
-                <input type="text" class="form-control contact-message mb-3">
-                <button class="send-message">Send message</button>
+                <div class=" mb-3">
+                    <div class="d-flex justify-content-between">
+                        <div class="name-info mb-3">
+                            <label for="name" class="mb-2">Name</label>
+                            <input type="text" class="form-control contact-name">
+                        </div>
+                        <div class="email-info mb-3">
+                            <label for="email" class="mb-2">Email adress</label>
+                            <input type="text" class="form-control contact-email">
+                        </div>
+                    </div>
+                   
+                    <div class="mobile-info mb-3">
+                        <label for="phone-number" class="mb-2">Mobile number</label>
+                        <input type="tel" class="form-control contact-phone-number mb-3">
+                    </div>
+                    <div class="message-info mb-3">
+                        <label for="message" class="mb-2">Message</label>
+                        <input type="text" class="form-control contact-message">
+                    </div>
+                </>
+                <input type="submit" class="send-message" onclick="showInputValues()">
+                
             </div>
         </div>
         <div class="swiper mySwiper my-4">

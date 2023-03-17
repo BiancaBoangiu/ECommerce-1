@@ -113,14 +113,19 @@ body{
     border-radius: 3px;
 }
 
-.contact-name, .contact-email{
-    width: 35%;
-    height: 10%;
+.name-info, .email-info, .mobile-info{
+    width: 45%;
 }
+
+.contact-message{
+    height: 90px;
+    width: 55%;
+}
+
 
 .send-message{
     border-radius: 20px;
-    font-size: 17px;
+    font-size: 20px;
     color: #fff;
     background-color: #000;
 }
@@ -138,5 +143,14 @@ div.swiper-button-next, div.swiper-button-prev {
     width: 30%;
     height: 20%;
     border-radius: 4px;
+}
+
+.buttonload{
+    border-radius: 5px;
+    font-size: 25px;
+    color: #fff;
+    background-color: #2783eb;
+    width: 65px;
+    border: 0;
 }
 

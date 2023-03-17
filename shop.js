@@ -1,5 +1,8 @@
 let productNumbers = 0;
 let totalCost = 0;
+let nameErrorStatus = true;
+let messageErrorStatus = true;
+let formSubmitted = false;
 const hasProductsInLocalStorage = localStorage.getItem("products");
 const shopProducts = hasProductsInLocalStorage
   ? JSON.parse(hasProductsInLocalStorage)
@@ -173,6 +176,9 @@ fetch("https://jsonplaceholder.typicode.com/users")
 
 const sendMessageButton = document.querySelector(".send-message");
 const message = document.querySelector(".message");
+
+//Input values
+
 function showInputValues() {
   const inputNameValue = document.querySelector(".contact-name").value;
   const inputEmailValue = document.querySelector(".contact-email").value;
@@ -180,19 +186,83 @@ function showInputValues() {
     ".contact-phone-number"
   ).value;
   const inputMessageValue = document.querySelector(".contact-message").value;
-  const inputName = document.createElement("p");
-  inputName.innerText = `Name : ${inputNameValue}`;
-  const inputEmail = document.createElement("p");
-  inputEmail.innerText = `Email: ${inputEmailValue}`;
-  const inputPhoneNumber = document.createElement("p");
-  inputPhoneNumber.innerText = `Phone number: ${inputPhoneNumberValue}`;
-  const inputMessage = document.createElement("p");
-  inputMessage.innerText = `Message: ${inputMessageValue}`;
-  message.appendChild(inputName);
-  message.appendChild(inputEmail);
-  message.appendChild(inputPhoneNumber);
-  message.appendChild(inputMessage);
-  clearMessage();
+  const nameError = document.createElement("p");
+  nameError.innerText = "Error: Fill the name field";
+  nameError.style.color = "rgba(255, 0, 0, 0.6 )";
+  nameError.classList.add("name-error");
+  const messageError = document.createElement("p");
+  messageError.innerText = "Fill the message field";
+  messageError.style.color = "rgba(255, 0, 0, 0.6 )";
+  messageError.classList.add("message-error");
+  const nameInput = document.querySelector(".contact-name");
+  const messageInput = document.querySelector(".contact-message");
+
+  showLoadingIcon();
+
+  fetch("https://jsonplaceholder.typicode.com/posts", {
+    method: "POST",
+    body: JSON.stringify({
+      name: inputNameValue,
+      email: inputEmailValue,
+      number: inputPhoneNumberValue,
+      message: inputMessageValue,
+    }),
+    headers: {
+      "Content-type": "application/json; charset=UTF-8",
+    },
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      const contactContainer = document.querySelector(".contact");
+      const deleteLoadingButton = document.querySelector(".buttonload");
+      const submitButton = document.createElement("input");
+      submitButton.setAttribute("type", "submit");
+      submitButton.classList.add("send-message");
+      submitButton.setAttribute("onclick", "showInputValues()");
+      console.log(submitButton);
+      deleteLoadingButton.remove();
+      contactContainer.appendChild(submitButton);
+      if (inputNameValue === "" && nameErrorStatus === true) {
+        const nameContainer = document.querySelector(".name-info");
+        nameInput.style.border = "2px solid rgba(255, 0, 0, 0.6 )";
+        nameContainer.appendChild(nameError);
+
+        nameErrorStatus = false;
+      } else {
+        if (inputNameValue != "" && nameErrorStatus === false) {
+          document.querySelector(".name-error").remove();
+          nameInput.style.border = "";
+          nameErrorStatus = true;
+        }
+      }
+      if (
+        inputMessageValue != "" &&
+        inputNameValue != "" &&
+        formSubmitted === false
+      ) {
+        const inputName = document.createElement("p");
+        inputName.innerText = `Name : ${data.name}`;
+        message.appendChild(inputName);
+        const inputMessage = document.createElement("p");
+        inputMessage.innerText = `Message: ${data.message}`;
+        message.appendChild(inputMessage);
+        formSubmitted = true;
+      }
+
+      if (inputMessageValue === "" && messageErrorStatus === true) {
+        const messageContainer = document.querySelector(".message-info");
+        messageInput.style.border = "2px solid rgba(255, 0, 0, 0.6 )";
+        messageContainer.appendChild(messageError);
+        messageErrorStatus = false;
+      } else {
+        if (inputMessageValue != "" && messageErrorStatus === false)
+          document.querySelector(".message-error").remove();
+        messageInput.style.border = "";
+        nameMessageStatus = true;
+      }
+      clearMessage();
+    })
+    .catch(() => alert("Error"));
 }
 
 function clearMessage() {
@@ -201,9 +271,19 @@ function clearMessage() {
   }, 10000);
 }
 
-sendMessageButton.addEventListener("click", showInputValues);
+function showLoadingIcon() {
+  const messageButton = document.querySelector(".send-message");
+  messageButton.remove();
+  const loadingButton = document.createElement("button");
+  loadingButton.classList.add("buttonload");
+  const loadingIcon = document.createElement("i");
+  loadingIcon.classList.add("fa", "fa-spinner", "fa-spin");
+  const contactInfo = document.querySelector(".contact");
+  loadingButton.appendChild(loadingIcon);
+  contactInfo.appendChild(loadingButton);
+}
 
-let swiper = new Swiper(".mySwiper", {
+const swiper = new Swiper(".mySwiper", {
   navigation: {
     nextEl: ".swiper-button-next",
     prevEl: ".swiper-button-prev",
@@ -213,7 +293,10 @@ let swiper = new Swiper(".mySwiper", {
 fetch("https://jsonplaceholder.typicode.com/posts")
   .then((response) => response.json())
   .then((users) => {
-    users.forEach((user) => {
+    users.forEach((user, index) => {
+      if (index >= 10) {
+        return;
+      }
       const swiper = document.querySelector(".swiper-wrapper");
       const userPost = document.createElement("p");
       userPost.innerText = user.title;
