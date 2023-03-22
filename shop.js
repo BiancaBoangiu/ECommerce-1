@@ -2,7 +2,6 @@ let productNumbers = 0;
 let totalCost = 0;
 let nameErrorStatus = true;
 let messageErrorStatus = true;
-let formSubmitted = false;
 const hasProductsInLocalStorage = localStorage.getItem("products");
 const shopProducts = hasProductsInLocalStorage
   ? JSON.parse(hasProductsInLocalStorage)
@@ -197,6 +196,7 @@ function showInputValues() {
   const nameInput = document.querySelector(".contact-name");
   const messageInput = document.querySelector(".contact-message");
 
+  clearErrors();
   showLoadingIcon();
 
   fetch("https://jsonplaceholder.typicode.com/posts", {
@@ -222,50 +222,51 @@ function showInputValues() {
       console.log(submitButton);
       deleteLoadingButton.remove();
       contactContainer.appendChild(submitButton);
-      if (inputNameValue === "" && nameErrorStatus === true) {
+
+      if (inputNameValue === "") {
         const nameContainer = document.querySelector(".name-info");
         nameInput.style.border = "2px solid rgba(255, 0, 0, 0.6 )";
         nameContainer.appendChild(nameError);
-
-        nameErrorStatus = false;
-      } else {
-        if (inputNameValue != "" && nameErrorStatus === false) {
-          document.querySelector(".name-error").remove();
-          nameInput.style.border = "";
-          nameErrorStatus = true;
-        }
       }
-      if (
-        inputMessageValue != "" &&
-        inputNameValue != "" &&
-        formSubmitted === false
-      ) {
+
+      if (inputMessageValue === "") {
+        const messageContainer = document.querySelector(".message-info");
+        messageInput.style.border = "2px solid rgba(255, 0, 0, 0.6 )";
+        messageContainer.appendChild(messageError);
+      }
+
+      if (inputMessageValue != "" && inputNameValue != "") {
         const inputName = document.createElement("p");
         inputName.innerText = `Name : ${data.name}`;
         message.appendChild(inputName);
         const inputMessage = document.createElement("p");
         inputMessage.innerText = `Message: ${data.message}`;
         message.appendChild(inputMessage);
-        formSubmitted = true;
       }
 
-      if (inputMessageValue === "" && messageErrorStatus === true) {
-        const messageContainer = document.querySelector(".message-info");
-        messageInput.style.border = "2px solid rgba(255, 0, 0, 0.6 )";
-        messageContainer.appendChild(messageError);
-        messageErrorStatus = false;
-      } else {
-        if (inputMessageValue != "" && messageErrorStatus === false)
-          document.querySelector(".message-error").remove();
-        messageInput.style.border = "";
-        nameMessageStatus = true;
-      }
       clearMessage();
     })
     .catch(() => alert("Error"));
 }
 
+function clearErrors() {
+  const nameInput = document.querySelector(".contact-name");
+  const messageInput = document.querySelector(".contact-message");
+  nameInput.style.border = "";
+  messageInput.style.border = "";
+  const nameError = document.querySelector(".name-error");
+  const messageError = document.querySelector(".message-error");
+  if (nameError) {
+    nameError.remove();
+  }
+  if (messageError) {
+    messageError.remove();
+  }
+}
+
 function clearMessage() {
+  const form = document.querySelector("form");
+  form.reset();
   setTimeout(() => {
     message.innerHTML = "";
   }, 10000);

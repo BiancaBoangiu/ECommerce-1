@@ -141,16 +141,16 @@ div.swiper-button-next, div.swiper-button-prev {
 }
 .post-image{
     width: 30%;
-    height: 20%;
+    height: 70%;
     border-radius: 4px;
 }
 
 .buttonload{
-    border-radius: 5px;
-    font-size: 25px;
     color: #fff;
-    background-color: #2783eb;
-    width: 65px;
-    border: 0;
+    background-color: #000;
+    border-radius: 20px;
+    font-size: 20px;
+    width: 76px;
+    height: 35px;
 }
 
