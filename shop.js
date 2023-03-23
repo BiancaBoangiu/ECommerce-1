@@ -199,7 +199,7 @@ function showInputValues() {
   clearErrors();
   showLoadingIcon();
 
-  fetch("https://jsonplaceholder.typicode.com/posts", {
+  fetch("http://localhost:3000/messages", {
     method: "POST",
     body: JSON.stringify({
       name: inputNameValue,
@@ -219,7 +219,6 @@ function showInputValues() {
       submitButton.setAttribute("type", "submit");
       submitButton.classList.add("send-message");
       submitButton.setAttribute("onclick", "showInputValues()");
-      console.log(submitButton);
       deleteLoadingButton.remove();
       contactContainer.appendChild(submitButton);
 
@@ -242,6 +241,19 @@ function showInputValues() {
         const inputMessage = document.createElement("p");
         inputMessage.innerText = `Message: ${data.message}`;
         message.appendChild(inputMessage);
+
+        const customerReviews = document.querySelector(".customer-reviews");
+        const customerInfo = document.createElement("div");
+        customerInfo.classList.add("customer-review-info", "col-2");
+        const customerMessage = document.createElement("div");
+        customerMessage.classList.add("customer-message", "p-3", "mb-4");
+        customerMessage.innerText = inputMessageValue;
+        const customerName = document.createElement("div");
+        customerName.classList.add("customer-name", "fw-bold", "p-3");
+        customerName.innerText = inputNameValue;
+        customerInfo.appendChild(customerMessage);
+        customerInfo.appendChild(customerName);
+        customerReviews.appendChild(customerInfo);
       }
 
       clearMessage();
@@ -317,3 +329,27 @@ fetch("https://jsonplaceholder.typicode.com/posts")
       swiper.appendChild(postContainer);
     });
   });
+
+window.addEventListener("DOMContentLoaded", showCustomerMessages);
+
+function showCustomerMessages() {
+  let container = document.querySelector(".customer-reviews");
+  let template = "";
+
+  fetch("http://localhost:3000/messages")
+    .then((response) => response.json())
+    .then((data) => {
+      data.forEach((customer) => {
+        template += `<div class="customer-review-info col-2">
+            <div class="customer-message p-3 mb-4">
+               ${customer.message}
+            </div>
+            <div class="customer-name fw-bold p-3">
+                ${customer.name}
+            </div>
+    </div>`;
+      });
+
+      container.innerHTML = template;
+    });
+}

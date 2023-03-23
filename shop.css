@@ -154,3 +154,10 @@ div.swiper-button-next, div.swiper-button-prev {
     height: 35px;
 }
 
+.customer-review-info{
+    background-color: rgb(170, 193, 193);
+    border-radius: 5px;
+    height: 200px;
+    margin: 5px;
+}
+
