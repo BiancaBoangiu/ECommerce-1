@@ -155,9 +155,21 @@ div.swiper-button-next, div.swiper-button-prev {
 }
 
 .customer-review-info{
-    background-color: rgb(170, 193, 193);
+    background-color: rgb(158, 157, 129);
     border-radius: 5px;
     height: 200px;
     margin: 5px;
+    padding: 0;
+}
+
+.delete-button, .edit-button{
+    background-color: #000;
+    color: #fff;
+    width: 25%;
+    height: 40px;
+}
+
+.customer-name{
+    width: 50%;
 }
 

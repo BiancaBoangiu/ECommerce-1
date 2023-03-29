@@ -197,68 +197,76 @@ function showInputValues() {
   const messageInput = document.querySelector(".contact-message");
 
   clearErrors();
-  showLoadingIcon();
 
-  fetch("http://localhost:3000/messages", {
-    method: "POST",
-    body: JSON.stringify({
-      name: inputNameValue,
-      email: inputEmailValue,
-      number: inputPhoneNumberValue,
-      message: inputMessageValue,
-    }),
-    headers: {
-      "Content-type": "application/json; charset=UTF-8",
-    },
-  })
-    .then((response) => response.json())
-    .then((data) => {
-      const contactContainer = document.querySelector(".contact");
-      const deleteLoadingButton = document.querySelector(".buttonload");
-      const submitButton = document.createElement("input");
-      submitButton.setAttribute("type", "submit");
-      submitButton.classList.add("send-message");
-      submitButton.setAttribute("onclick", "showInputValues()");
-      deleteLoadingButton.remove();
-      contactContainer.appendChild(submitButton);
+  if (inputNameValue === "") {
+    const nameContainer = document.querySelector(".name-info");
+    nameInput.style.border = "2px solid rgba(255, 0, 0, 0.6 )";
+    nameContainer.appendChild(nameError);
+  }
 
-      if (inputNameValue === "") {
-        const nameContainer = document.querySelector(".name-info");
-        nameInput.style.border = "2px solid rgba(255, 0, 0, 0.6 )";
-        nameContainer.appendChild(nameError);
-      }
+  if (inputMessageValue === "") {
+    const messageContainer = document.querySelector(".message-info");
+    messageInput.style.border = "2px solid rgba(255, 0, 0, 0.6 )";
+    messageContainer.appendChild(messageError);
+  }
 
-      if (inputMessageValue === "") {
-        const messageContainer = document.querySelector(".message-info");
-        messageInput.style.border = "2px solid rgba(255, 0, 0, 0.6 )";
-        messageContainer.appendChild(messageError);
-      }
+  if (inputMessageValue != "" && inputNameValue != "") {
+    showLoadingIcon();
+    const customerReviews = document.querySelector(".customer-reviews");
+    const customerInfo = document.createElement("div");
+    customerInfo.classList.add("customer-review-info", "col-2");
+    const nameButtons = document.createElement("div");
+    nameButtons.classList.add(
+      "d-flex",
+      "justify-content-between",
+      "align-items-center"
+    );
+    const customerMessage = document.createElement("div");
+    customerMessage.classList.add("customer-message", "mb-4", "p-2");
+    customerMessage.innerText = inputMessageValue;
+    const customerName = document.createElement("div");
+    customerName.classList.add("customer-name", "fw-bold", "p-2");
+    customerName.innerText = inputNameValue;
+    const deleteButton = document.createElement("button");
+    deleteButton.innerText = "Delete";
+    deleteButton.classList.add("delete-button");
+    const editButton = document.createElement("button");
+    editButton.innerText = "Edit";
+    editButton.classList.add("edit-button");
+    nameButtons.appendChild(customerName);
+    nameButtons.appendChild(deleteButton);
+    nameButtons.appendChild(editButton);
+    customerInfo.appendChild(nameButtons);
+    customerInfo.appendChild(customerMessage);
+    customerReviews.appendChild(customerInfo);
 
-      if (inputMessageValue != "" && inputNameValue != "") {
-        const inputName = document.createElement("p");
-        inputName.innerText = `Name : ${data.name}`;
-        message.appendChild(inputName);
-        const inputMessage = document.createElement("p");
-        inputMessage.innerText = `Message: ${data.message}`;
-        message.appendChild(inputMessage);
-
-        const customerReviews = document.querySelector(".customer-reviews");
-        const customerInfo = document.createElement("div");
-        customerInfo.classList.add("customer-review-info", "col-2");
-        const customerMessage = document.createElement("div");
-        customerMessage.classList.add("customer-message", "p-3", "mb-4");
-        customerMessage.innerText = inputMessageValue;
-        const customerName = document.createElement("div");
-        customerName.classList.add("customer-name", "fw-bold", "p-3");
-        customerName.innerText = inputNameValue;
-        customerInfo.appendChild(customerMessage);
-        customerInfo.appendChild(customerName);
-        customerReviews.appendChild(customerInfo);
-      }
-
-      clearMessage();
+    fetch("http://localhost:3000/messages", {
+      method: "POST",
+      body: JSON.stringify({
+        name: inputNameValue,
+        email: inputEmailValue,
+        number: inputPhoneNumberValue,
+        message: inputMessageValue,
+      }),
+      headers: {
+        "Content-type": "application/json; charset=UTF-8",
+      },
     })
-    .catch(() => alert("Error"));
+      .then((response) => response.json())
+      .then((data) => {
+        const contactContainer = document.querySelector(".contact");
+        const deleteLoadingButton = document.querySelector(".buttonload");
+        const submitButton = document.createElement("input");
+        submitButton.setAttribute("type", "submit");
+        submitButton.classList.add("send-message");
+        submitButton.setAttribute("onclick", "showInputValues()");
+        deleteLoadingButton.remove();
+        contactContainer.appendChild(submitButton);
+
+        clearMessage();
+      })
+      .catch(() => alert("Error"));
+  }
 }
 
 function clearErrors() {
@@ -279,9 +287,6 @@ function clearErrors() {
 function clearMessage() {
   const form = document.querySelector("form");
   form.reset();
-  setTimeout(() => {
-    message.innerHTML = "";
-  }, 10000);
 }
 
 function showLoadingIcon() {
@@ -296,60 +301,42 @@ function showLoadingIcon() {
   contactInfo.appendChild(loadingButton);
 }
 
-const swiper = new Swiper(".mySwiper", {
-  navigation: {
-    nextEl: ".swiper-button-next",
-    prevEl: ".swiper-button-prev",
-  },
-});
-
-fetch("https://jsonplaceholder.typicode.com/posts")
-  .then((response) => response.json())
-  .then((users) => {
-    users.forEach((user, index) => {
-      if (index >= 10) {
-        return;
-      }
-      const swiper = document.querySelector(".swiper-wrapper");
-      const userPost = document.createElement("p");
-      userPost.innerText = user.title;
-      userPost.style.padding = "15px";
-      const userPhoto = document.createElement("img");
-      userPhoto.setAttribute("src", "photos/person.jpg");
-      userPhoto.classList.add("post-image");
-      const postContainer = document.createElement("div");
-      postContainer.classList.add(
-        "d-flex",
-        "justify-content-center",
-        "swiper-slide",
-        "align-items-center"
-      );
-      postContainer.appendChild(userPhoto);
-      postContainer.appendChild(userPost);
-      swiper.appendChild(postContainer);
-    });
-  });
-
 window.addEventListener("DOMContentLoaded", showCustomerMessages);
 
 function showCustomerMessages() {
-  let container = document.querySelector(".customer-reviews");
+  const container = document.querySelector(".customer-reviews");
   let template = "";
 
   fetch("http://localhost:3000/messages")
     .then((response) => response.json())
     .then((data) => {
       data.forEach((customer) => {
-        template += `<div class="customer-review-info col-2">
-            <div class="customer-message p-3 mb-4">
-               ${customer.message}
-            </div>
-            <div class="customer-name fw-bold p-3">
-                ${customer.name}
-            </div>
-    </div>`;
+        template += `
+        <div class="customer-review-info col-2" data-id = "${customer.id}">
+          <div class = "d-flex justify-content-between align-items-center">
+            <div class="customer-name p-2">
+            ${customer.name}</div>
+            <button class = "delete-button">Delete</button>
+            <button class = "edit-button">Edit</button>
+          </div>
+          <div class="customer-message fw-bold p-2">
+          ${customer.message}
+          </div>
+        </div>`;
       });
 
       container.innerHTML = template;
+      const deleteButtons = document.querySelectorAll(".delete-button");
+      deleteButtons.forEach((button) => {
+        button.addEventListener("click", (e) => {
+          console.log(e);
+          const id =
+            e.target.parentElement.parentElement.getAttribute("data-id");
+          console.log(id);
+          fetch("http://localhost:3000/messages/" + id, {
+            method: "DELETE",
+          });
+        });
+      });
     });
 }
