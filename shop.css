@@ -2,7 +2,14 @@ body{
     font-family: Tahoma;
     box-sizing: border-box;
     font-size: 12 px;
+ 
 }
+
+.container-fluid{
+    padding: 0;
+}
+
+
 
 .shop-menu {
     list-style-type: none;
@@ -13,7 +20,7 @@ body{
 .bi-bag {
     font-size: 20px;
     border: none;
-    background-color: rgb(255, 255, 255, 50);
+  
 }
 
 .shop-banner {
