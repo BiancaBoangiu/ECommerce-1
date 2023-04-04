@@ -2,6 +2,8 @@ let productNumbers = 0;
 let totalCost = 0;
 let nameErrorStatus = true;
 let messageErrorStatus = true;
+let isEditing = false;
+let selectedReviewId = 0;
 const hasProductsInLocalStorage = localStorage.getItem("products");
 const shopProducts = hasProductsInLocalStorage
   ? JSON.parse(hasProductsInLocalStorage)
@@ -212,60 +214,129 @@ function showInputValues() {
 
   if (inputMessageValue != "" && inputNameValue != "") {
     showLoadingIcon();
-    const customerReviews = document.querySelector(".customer-reviews");
-    const customerInfo = document.createElement("div");
-    customerInfo.classList.add("customer-review-info", "col-2");
-    const nameButtons = document.createElement("div");
-    nameButtons.classList.add(
-      "d-flex",
-      "justify-content-between",
-      "align-items-center"
-    );
-    const customerMessage = document.createElement("div");
-    customerMessage.classList.add("customer-message", "mb-4", "p-2");
-    customerMessage.innerText = inputMessageValue;
-    const customerName = document.createElement("div");
-    customerName.classList.add("customer-name", "fw-bold", "p-2");
-    customerName.innerText = inputNameValue;
-    const deleteButton = document.createElement("button");
-    deleteButton.innerText = "Delete";
-    deleteButton.classList.add("delete-button");
-    const editButton = document.createElement("button");
-    editButton.innerText = "Edit";
-    editButton.classList.add("edit-button");
-    nameButtons.appendChild(customerName);
-    nameButtons.appendChild(deleteButton);
-    nameButtons.appendChild(editButton);
-    customerInfo.appendChild(nameButtons);
-    customerInfo.appendChild(customerMessage);
-    customerReviews.appendChild(customerInfo);
-
-    fetch("http://localhost:3000/messages", {
-      method: "POST",
-      body: JSON.stringify({
-        name: inputNameValue,
-        email: inputEmailValue,
-        number: inputPhoneNumberValue,
-        message: inputMessageValue,
-      }),
-      headers: {
-        "Content-type": "application/json; charset=UTF-8",
-      },
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        const contactContainer = document.querySelector(".contact");
-        const deleteLoadingButton = document.querySelector(".buttonload");
-        const submitButton = document.createElement("input");
-        submitButton.setAttribute("type", "submit");
-        submitButton.classList.add("send-message");
-        submitButton.setAttribute("onclick", "showInputValues()");
-        deleteLoadingButton.remove();
-        contactContainer.appendChild(submitButton);
-
-        clearMessage();
+    if (isEditing === false) {
+      fetch("http://localhost:3000/messages", {
+        method: "POST",
+        body: JSON.stringify({
+          name: inputNameValue,
+          email: inputEmailValue,
+          number: inputPhoneNumberValue,
+          message: inputMessageValue,
+        }),
+        headers: {
+          "Content-type": "application/json; charset=UTF-8",
+        },
       })
-      .catch(() => alert("Error"));
+        .then((response) => response.json())
+        .then((data) => {
+          const customerReviews = document.querySelector(".customer-reviews");
+          const customerInfo = document.createElement("div");
+          customerInfo.classList.add("customer-review-info", "col-2");
+          customerInfo.setAttribute("data-id", data.id);
+          const nameButtons = document.createElement("div");
+          nameButtons.classList.add(
+            "d-flex",
+            "justify-content-between",
+            "align-items-center"
+          );
+          const customerMessage = document.createElement("div");
+          customerMessage.classList.add("customer-message", "mb-4", "p-2");
+          customerMessage.innerText = inputMessageValue;
+          const customerName = document.createElement("div");
+          customerName.classList.add("customer-name", "fw-bold", "p-2");
+          customerName.innerText = inputNameValue;
+          const deleteButton = document.createElement("button");
+          deleteButton.innerText = "Delete";
+          deleteButton.classList.add("delete-button");
+          deleteButton.addEventListener("click", (e) => {
+            deleteReview(e);
+          });
+          const editButton = document.createElement("button");
+          editButton.innerText = "Edit";
+          editButton.classList.add("edit-button");
+          editButton.addEventListener("click", (e) => {
+            editReview(e);
+          });
+          nameButtons.appendChild(customerName);
+          nameButtons.appendChild(deleteButton);
+          nameButtons.appendChild(editButton);
+          customerInfo.appendChild(nameButtons);
+          customerInfo.appendChild(customerMessage);
+          customerReviews.appendChild(customerInfo);
+
+          const contactContainer = document.querySelector(".contact");
+          const deleteLoadingButton = document.querySelector(".buttonload");
+          const submitButton = document.createElement("input");
+          submitButton.setAttribute("type", "submit");
+          submitButton.classList.add("send-message");
+          submitButton.setAttribute("onclick", "showInputValues()");
+          deleteLoadingButton.remove();
+          contactContainer.appendChild(submitButton);
+
+          clearForm();
+        })
+        .catch(() => alert("Error"));
+    } else {
+      fetch("http://localhost:3000/messages/" + selectedReviewId, {
+        method: "PUT",
+        body: JSON.stringify({
+          name: inputNameValue,
+          email: inputEmailValue,
+          number: inputPhoneNumberValue,
+          message: inputMessageValue,
+        }),
+        headers: {
+          "Content-type": "application/json; charset=UTF-8",
+        },
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          const selectedReview = document.querySelector(
+            `.customer-review-info[data-id="${selectedReviewId}"`
+          );
+          selectedReview.querySelector(".d-flex").remove();
+          selectedReview.querySelector(".customer-message").remove();
+          const nameButtons = document.createElement("div");
+          nameButtons.classList.add(
+            "d-flex",
+            "justify-content-between",
+            "align-items-center"
+          );
+          const customerMessage = document.createElement("div");
+          customerMessage.classList.add("customer-message", "mb-4", "p-2");
+          customerMessage.innerText = data.message;
+          const customerName = document.createElement("div");
+          customerName.classList.add("customer-name", "fw-bold", "p-2");
+          customerName.innerText = data.name;
+          const deleteButton = document.createElement("button");
+          deleteButton.innerText = "Delete";
+          deleteButton.classList.add("delete-button");
+          deleteButton.addEventListener("click", (e) => {
+            deleteReview(e);
+          });
+          const editButton = document.createElement("button");
+          editButton.innerText = "Edit";
+          editButton.classList.add("edit-button");
+          editButton.addEventListener("click", (e) => {
+            editReview(e);
+          });
+          const contactContainer = document.querySelector(".contact");
+          const deleteLoadingButton = document.querySelector(".buttonload");
+          const submitButton = document.createElement("input");
+          submitButton.setAttribute("type", "submit");
+          submitButton.classList.add("send-message");
+          submitButton.setAttribute("onclick", "showInputValues()");
+          deleteLoadingButton.remove();
+          contactContainer.appendChild(submitButton);
+          nameButtons.appendChild(customerName);
+          nameButtons.appendChild(deleteButton);
+          nameButtons.appendChild(editButton);
+          selectedReview.appendChild(nameButtons);
+          selectedReview.appendChild(customerMessage);
+          clearForm();
+        })
+        .catch(() => alert("Error"));
+    }
   }
 }
 
@@ -284,7 +355,7 @@ function clearErrors() {
   }
 }
 
-function clearMessage() {
+function clearForm() {
   const form = document.querySelector("form");
   form.reset();
 }
@@ -316,8 +387,8 @@ function showCustomerMessages() {
           <div class = "d-flex justify-content-between align-items-center">
             <div class="customer-name p-2">
             ${customer.name}</div>
-            <button class = "delete-button">Delete</button>
-            <button class = "edit-button">Edit</button>
+            <button class = "delete-button" onclick = "deleteReview(event)">Delete</button>
+            <button class = "edit-button" onclick = "editReview(event)">Edit</button>
           </div>
           <div class="customer-message fw-bold p-2">
           ${customer.message}
@@ -326,17 +397,26 @@ function showCustomerMessages() {
       });
 
       container.innerHTML = template;
-      const deleteButtons = document.querySelectorAll(".delete-button");
-      deleteButtons.forEach((button) => {
-        button.addEventListener("click", (e) => {
-          console.log(e);
-          const id =
-            e.target.parentElement.parentElement.getAttribute("data-id");
-          console.log(id);
-          fetch("http://localhost:3000/messages/" + id, {
-            method: "DELETE",
-          });
-        });
-      });
     });
+}
+
+function editReview(e) {
+  isEditing = true;
+  selectedReviewId =
+    +e.target.parentElement.parentElement.getAttribute("data-id");
+  const inputName = document.querySelector(".name-info .contact-name");
+  inputName.value =
+    e.target.parentElement.querySelector(".customer-name").innerText;
+
+  const inputMessage = document.querySelector(".message-info .contact-message");
+  inputMessage.value =
+    e.target.parentElement.parentElement.querySelector(
+      ".customer-message"
+    ).innerText;
+}
+function deleteReview(e) {
+  const id = e.target.parentElement.parentElement.getAttribute("data-id");
+  fetch("http://localhost:3000/messages/" + id, {
+    method: "DELETE",
+  }).then(e.target.parentElement.parentElement.remove());
 }
