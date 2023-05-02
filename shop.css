@@ -23,6 +23,10 @@ body{
   
 }
 
+.add-cart{
+    background-color: #fff;
+}
+
 .shop-banner {
     height: 400px;
     position: relative;
@@ -115,7 +119,7 @@ body{
 }
 
 .contact{
-    background-color: #ede9e9;
+    background-color: #fafafa;
     padding: 18px;
     border-radius: 3px;
 }
@@ -131,21 +135,13 @@ body{
 
 
 .send-message{
-    border-radius: 20px;
+    border-radius: 5px;
     font-size: 20px;
     color: #fff;
     background-color: #000;
 }
 
-.swiper-button-next,
-.swiper-button-prev {
-   outline: none;
-}
 
-
-div.swiper-button-next, div.swiper-button-prev {
-  top: 70%
-}
 .post-image{
     width: 30%;
     height: 70%;
@@ -162,15 +158,17 @@ div.swiper-button-next, div.swiper-button-prev {
 }
 
 .customer-review-info{
-    background-color: rgb(158, 157, 129);
+    background-image: linear-gradient(to right, #e3e3e3 , #848b94);
     border-radius: 5px;
-    height: 200px;
+    box-shadow: 3px 6px #b9b8b8;
+    height: 230px;
     margin: 5px;
     padding: 0;
 }
 
 .delete-button, .edit-button{
     background-color: #000;
+    border-radius: 5px;
     color: #fff;
     width: 25%;
     height: 40px;
@@ -178,5 +176,28 @@ div.swiper-button-next, div.swiper-button-prev {
 
 .customer-name{
     width: 50%;
+}
+
+.team-image{
+    width: 100%;
+    height: 170px;
+    border-radius: 5px 5px 0 0;
+}
+
+.team-info{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.user-name,.user-email{
+    width: 100%;
+    text-align: center;
+    background-color: #e3e3e3;
+}
+
+
+.user-email{
+    border-radius: 0 0 5px 5px;
 }
 

@@ -143,12 +143,13 @@ function localStorageToCart() {
 
 localStorageToCart();
 
-fetch("https://jsonplaceholder.typicode.com/users")
+fetch("http://localhost:3000/team")
   .then((response) => response.json())
   .then((users) => {
     const username = document.querySelector(".navbar-brand");
     username.innerText = users[0].username;
     const teamSection = document.createElement("div");
+    teamSection.classList.add("container-fluid");
     const container = document.querySelector(".info");
     const teamMembers = document.createElement("h3");
     teamMembers.innerText = "OUR TEAM";
@@ -157,16 +158,16 @@ fetch("https://jsonplaceholder.typicode.com/users")
     teamSection.classList.add("row");
     users.forEach((user) => {
       const userCol = document.createElement("div");
-      userCol.classList.add("col-md-4", "col-6", "mb-3");
+      userCol.classList.add("col-md-4", "col-6", "mb-3", "team-info");
       const userName = document.createElement("p");
+      userName.classList.add("py-2", "user-name", "m-0");
       userName.innerText = user.username;
-      userName.classList.add("mb-1");
       const userEmail = document.createElement("p");
       userEmail.innerText = user.email;
-      const userIcon = document.createElement("i");
-      userIcon.classList.add("fa-solid", "fa-user", "mb-2");
-      userIcon.style.color = "blue";
-      userIcon.style.fontSize = "22px";
+      userEmail.classList.add("user-email", "pb-2");
+      const userIcon = document.createElement("img");
+      userIcon.classList.add("team-image");
+      userIcon.src = user.url;
       userCol.appendChild(userIcon);
       userCol.appendChild(userName);
       userCol.appendChild(userEmail);
@@ -384,12 +385,12 @@ function showCustomerMessages() {
       data.forEach((customer) => {
         template += `
         <div class="customer-review-info col-2" data-id = "${customer.id}">
-          <div class = "d-flex justify-content-between align-items-center">
-            <div class="customer-name p-2">
-            ${customer.name}</div>
+          <div class = "d-flex justify-content-end align-items-center">
             <button class = "delete-button" onclick = "deleteReview(event)">Delete</button>
             <button class = "edit-button" onclick = "editReview(event)">Edit</button>
           </div>
+          <div class="customer-name p-2">
+            ${customer.name}</div>
           <div class="customer-message fw-bold p-2">
           ${customer.message}
           </div>
