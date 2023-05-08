@@ -146,19 +146,20 @@ localStorageToCart();
 fetch("http://localhost:3000/team")
   .then((response) => response.json())
   .then((users) => {
-    const username = document.querySelector(".navbar-brand");
-    username.innerText = users[0].username;
     const teamSection = document.createElement("div");
-    teamSection.classList.add("container-fluid");
+    teamSection.classList.add("container", "team-section");
+    const teamSectionRow = document.createElement("div");
+    teamSectionRow.classList.add("row");
     const container = document.querySelector(".info");
     const teamMembers = document.createElement("h3");
     teamMembers.innerText = "OUR TEAM";
-    teamMembers.classList.add("text-center", "py-2");
-    teamSection.appendChild(teamMembers);
-    teamSection.classList.add("row");
+    teamMembers.classList.add("text-center", "py-4");
+    teamSection.appendChild(teamSectionRow);
+    teamSectionRow.appendChild(teamMembers);
+
     users.forEach((user) => {
       const userCol = document.createElement("div");
-      userCol.classList.add("col-md-4", "col-6", "mb-3", "team-info");
+      userCol.classList.add("col-3", "mb-3", "team-info");
       const userName = document.createElement("p");
       userName.classList.add("py-2", "user-name", "m-0");
       userName.innerText = user.username;
@@ -171,7 +172,7 @@ fetch("http://localhost:3000/team")
       userCol.appendChild(userIcon);
       userCol.appendChild(userName);
       userCol.appendChild(userEmail);
-      teamSection.appendChild(userCol);
+      teamSectionRow.appendChild(userCol);
       container.appendChild(teamSection);
     });
   });
@@ -407,7 +408,9 @@ function editReview(e) {
     +e.target.parentElement.parentElement.getAttribute("data-id");
   const inputName = document.querySelector(".name-info .contact-name");
   inputName.value =
-    e.target.parentElement.querySelector(".customer-name").innerText;
+    e.target.parentElement.parentElement.querySelector(
+      ".customer-name"
+    ).innerText;
 
   const inputMessage = document.querySelector(".message-info .contact-message");
   inputMessage.value =

@@ -8,7 +8,9 @@
       "id": 2
     },
     {
-      "name": "ds",
+      "name": "beanca",
+      "email": "",
+      "number": "",
       "message": "dsfs",
       "id": 5
     },
@@ -39,13 +41,6 @@
       "number": "",
       "message": "sdfsfsffsd",
       "id": 16
-    },
-    {
-      "name": "dsfdsf",
-      "email": "",
-      "number": "",
-      "message": "dsfsdfs",
-      "id": 17
     }
   ],
   "team": [
@@ -240,31 +235,6 @@
         "catchPhrase": "Implemented secondary concept",
         "bs": "e-enable extensible e-tailers"
       }
-    },
-    {
-      "id": 9,
-      "url": "https://images.pexels.com/photos/1300402/pexels-photo-1300402.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-      "name": "Glenna Reichert",
-      "username": "Lewis",
-      "email": "Chaim_McDermott@dana.io",
-      "address": {
-        "street": "Dayna Park",
-        "suite": "Suite 449",
-        "city": "Bartholomebury",
-        "zipcode": "76495-3109",
-        "geo": {
-          "lat": "24.6463",
-          "lng": "-168.8889"
-        }
-      },
-      "phone": "(775)976-6794 x41206",
-      "website": "conrad.com",
-      "company": {
-        "name": "Yost and Sons",
-        "catchPhrase": "Switchable contextually-based project",
-        "bs": "aggregate real-time technologies"
-      }
-    
     }
   ]
 }
