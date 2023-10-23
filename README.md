@@ -9,5 +9,4 @@
 ### Cart Page
 
 ![Alt text](./public/shop2.png)
-
 ![Alt text](./public/shop3.png)
