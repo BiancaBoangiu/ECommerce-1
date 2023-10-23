@@ -6,7 +6,10 @@
 
 ![Alt text](./public/shop1.png)
 
-### Cart Page
+### Cart
 
 ![Alt text](./public/shop2.png)
+
+### Checkout Page
+
 ![Alt text](./public/shop3.png)
